@@ -8,7 +8,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 
 # Android studio
-export PATH="$PATH:/opt/homebrew/opt/openjdk/bin"
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export PATH="$PATH:$ANDROID_HOME/emulator"
 export PATH="$PATH:$ANDROID_HOME/tools"
