@@ -11,3 +11,4 @@ opt.softtabstop = 2
 opt.shiftwidth = 2
 
 vim.g.lazyvim_php_lsp = "intelephense"
+vim.g.lazyvim_python_ruff = "ruff"
