@@ -15,10 +15,7 @@ return {
       auto_insert_mode = true,
       prompts = {
         Fix = {
-          prompt = (
-            "There is a problem in this code. Identify the issues using the provided diagnostics and fix them. "
-            .. "Explain what was wrong and how your changes address the problems."
-          ),
+          prompt = "There is a problem in this code. Identify the issues using the provided diagnostics and fix them. Explain what was wrong and how your changes address the problems.",
           system_prompt = (
             "You are an expert software engineer. "
             .. "You will be provided with code that has issues along with diagnostics from a compiler or linter. "
@@ -43,11 +40,7 @@ return {
           ),
         },
         Explain = {
-          prompt = (
-            "Explain what the following code does, its purpose, and any important details a developer should know. "
-            .. "Base your explanation on the provided context. "
-            .. "Focus on clarity and conciseness. Do not include usage examples or instructions."
-          ),
+          prompt = "Explain what the following code does, its purpose, and any important details a developer should know. ",
           system_prompt = (
             "You are an expert software engineer. "
             .. "Your task is to explain the provided code snippet, describing its functionality, intent, and any noteworthy implementation details. "
@@ -56,12 +49,7 @@ return {
           ),
         },
         Review = {
-          prompt = (
-            "Review the following code for correctness, readability, maintainability, and potential issues. "
-            .. "Base your review on the provided context. "
-            .. "Provide clear, concise feedback and suggestions for improvement. "
-            .. "Do not include usage examples or instructions."
-          ),
+          prompt = "Review the following code for correctness, readability, maintainability, and potential issues. ",
           system_prompt = (
             "You are an expert software engineer. "
             .. "Your task is to review the provided code snippet, evaluating its correctness, readability, maintainability, and identifying any potential issues. "
@@ -69,21 +57,43 @@ return {
             .. "Offer clear, concise feedback and actionable suggestions for improvement, without including usage examples or instructions."
           ),
         },
+        Commit = {
+          prompt = "Write a concise and clear commit message for the staged changes",
+          system_prompt = (
+            "You are a senior software engineer. "
+            .. "Generate a high-signal commits message. "
+            .. "Strictly enforce: subject <= 72 characters; body lines <= 72 characters."
+            .. "Mention key changes and omit noise."
+            .. "Output only the commit message in plain code block"
+          ),
+        },
+        Test = {
+          prompt = "Generate tests for the selected code.",
+          system_prompt = (
+            "You are a senior software engineer focused on writing reliable automated tests. "
+            .. "Given the provided code context, generate appropriate tests for the project. "
+            .. "Prefer the project's existing test framework and conventions. "
+            .. "Cover key behaviors, edge cases, and error handling. "
+            .. "Keep tests deterministic; avoid network and time dependencies unless mocked. "
+            .. "If dependencies must be mocked, include minimal mocking setup. "
+            .. "Output only the test code (and minimal necessary setup files if required)."
+          ),
+        },
       },
     },
     keys = {
       { "<leader>cc", ":CopilotChat ", mode = { "n" } },
-      { "<leader>cca", ":CopilotChat #buffer active #selection ", mode = "v" },
       { "<leader>ccc", ":CopilotChatClose<CR>", mode = "n" },
       { "<leader>ccx", ":CopilotChatReset<CR>", mode = "n" },
       { "<leader>ccm", ":CopilotChatModels<CR>", mode = "n" },
-      { "<leader>cce", ":CopilotChatExplain #buffer active #selection <CR>", mode = "v" },
-      { "<leader>ccr", ":CopilotChatReview #buffer active #selection <CR>", mode = "v" },
-      { "<leader>ccf", ":CopilotChatFix #buffer active #selection ", mode = "v" },
-      { "<leader>cco", ":CopilotChatOptimize #buffer active #selection <CR>", mode = "v" },
+      { "<leader>cca", ":CopilotChat #selection ", mode = "v" },
+      { "<leader>ccf", ":CopilotChatFix #selection ", mode = "v" },
       { "<leader>ccd", ":CopilotChatDocument #buffer active #selection <CR>", mode = "v" },
-      { "<leader>cct", ":CopilotChatTests<CR>", mode = "v" },
-      { "<leader>ccg", ":CopilotChatCommit<CR>", mode = "n" },
+      { "<leader>cct", ":CopilotChatTest #buffer active <CR>", mode = "v" },
+      { "<leader>cce", ":CopilotChatExplain #selection <CR>", mode = "v" },
+      { "<leader>ccr", ":CopilotChatReview #selection <CR>", mode = "v" },
+      { "<leader>cco", ":CopilotChatOptimize #buffer active #selection <CR>", mode = "v" },
+      { "<leader>ccg", ":CopilotChatCommit #gitdiff:staged <CR>", mode = "n" },
     },
   },
 }
