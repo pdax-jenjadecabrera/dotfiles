@@ -64,7 +64,7 @@ return {
             .. "Generate a high-signal commits message. "
             .. "Strictly enforce: subject <= 72 characters; body lines <= 72 characters."
             .. "Mention key changes and omit noise."
-            .. "Output only the commit message in plain code block"
+            .. "Output only the commit message in git commit block"
           ),
         },
         Test = {
