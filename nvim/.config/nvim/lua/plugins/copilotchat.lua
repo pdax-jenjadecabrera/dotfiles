@@ -25,7 +25,7 @@ return {
         },
         Document = {
           prompt = (
-            "Generate documentation for the following code by adding concise comments or docstrings directly to the code. "
+            "Generate documentation for the following highlighted code by adding concise comments or docstrings directly to the code."
             .. "For atomic processes, use a single line comment. "
             .. "For other parts, provide concise yet clear documentation. "
             .. "Base the documentation on the context provided, considering surrounding code and project details. "
@@ -40,7 +40,7 @@ return {
           ),
         },
         Explain = {
-          prompt = "Explain what the following code does, its purpose, and any important details a developer should know. ",
+          prompt = "Explain what the following highlighted code does, its purpose, and any important details a developer should know. ",
           system_prompt = (
             "You are an expert software engineer. "
             .. "Your task is to explain the provided code snippet, describing its functionality, intent, and any noteworthy implementation details. "
@@ -49,7 +49,7 @@ return {
           ),
         },
         Review = {
-          prompt = "Review the following code for correctness, readability, maintainability, and potential issues. ",
+          prompt = "Review the following highlighted code for correctness, readability, maintainability, and potential issues. ",
           system_prompt = (
             "You are an expert software engineer. "
             .. "Your task is to review the provided code snippet, evaluating its correctness, readability, maintainability, and identifying any potential issues. "
@@ -61,10 +61,11 @@ return {
           prompt = "Write a concise and clear commit message for the staged changes",
           system_prompt = (
             "You are a senior software engineer. "
-            .. "Generate a high-signal commits message. "
-            .. "Strictly enforce: subject <= 72 characters; body lines <= 72 characters."
-            .. "Mention key changes and omit noise."
-            .. "Output only the commit message in git commit block"
+            .. "Generate a high-signal commit message. "
+            .. "Mention key changes and omit noise. "
+            .. "If you include shell-sensitive characters (e.g. ;, &, |, `, $, \", ', \\), "
+            .. "escape them so the message is safe to paste into a terminal command. "
+            .. "Output only the commit message in a git commit block."
           ),
         },
         Test = {
@@ -79,6 +80,15 @@ return {
             .. "Output only the test code (and minimal necessary setup files if required)."
           ),
         },
+        Optimize = {
+          prompt = "Optimize the following highlighted code for performance, readability, and maintainability. Explain the changes.",
+          system_prompt = (
+            "You are an expert software engineer. "
+            .. "Your task is to optimize the provided code snippet, improving its performance, readability, and maintainability. "
+            .. "Explain the changes you make and why they improve the code. "
+            .. "Base your optimizations on the context given."
+          ),
+        },
       },
     },
     keys = {
@@ -86,7 +96,7 @@ return {
       { "<leader>ccc", ":CopilotChatClose<CR>", mode = "n" },
       { "<leader>ccx", ":CopilotChatReset<CR>", mode = "n" },
       { "<leader>ccm", ":CopilotChatModels<CR>", mode = "n" },
-      { "<leader>cca", ":CopilotChat #buffer active #selection ", mode = "v" },
+      { "<leader>cca", ":CopilotChat #buffer active #selection ", mode = { "v", "n" } },
       { "<leader>ccf", ":CopilotChatFix #buffer active #selection ", mode = "v" },
       { "<leader>ccd", ":CopilotChatDocument #buffer active #selection <CR>", mode = "v" },
       { "<leader>cct", ":CopilotChatTest #buffer active <CR>", mode = "v" },
